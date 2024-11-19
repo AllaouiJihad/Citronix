@@ -5,11 +5,11 @@ import com.example.citronix.model.Field;
 import com.example.citronix.repository.FieldRepository;
 import com.example.citronix.service.FieldService;
 import jakarta.validation.constraints.Null;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-@Service
+@Component(value = "fieldImpl")
 public class FieldServiceImpl implements FieldService {
     FieldRepository fieldRepository;
 

@@ -1,9 +1,11 @@
 package com.example.citronix.service;
 
 import com.example.citronix.model.Farm;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface FarmService {
 
     Farm save(Farm farm);

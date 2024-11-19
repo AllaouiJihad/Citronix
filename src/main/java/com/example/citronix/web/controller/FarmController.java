@@ -7,6 +7,7 @@ import com.example.citronix.web.VM.FarmResponseDTO;
 import com.example.citronix.web.VM.mapper.FarmMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/farm")
 public class FarmController {
+    @Qualifier(value = "farmImpl")
     private FarmService farmService;
     @Autowired
     private FarmMapper farmMapper;

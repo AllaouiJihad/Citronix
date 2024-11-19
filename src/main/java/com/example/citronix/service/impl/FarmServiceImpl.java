@@ -8,12 +8,13 @@ import com.example.citronix.model.Field;
 import com.example.citronix.repository.FarmRepository;
 import com.example.citronix.service.FarmService;
 import com.example.citronix.service.FieldService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
 import java.util.List;
 
-@Service
+@Component(value = "farmImpl")
 public class FarmServiceImpl implements FarmService {
 
     private final FarmRepository farmRepository;
