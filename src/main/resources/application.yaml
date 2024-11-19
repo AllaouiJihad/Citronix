@@ -1,0 +1,20 @@
+spring:
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/Citronix
+    username: GreenPulse
+    password:
+
+  jpa:
+    properties:
+      hibernate:
+        default_schema: public
+
+  liquibase:
+    enabled: true
+    change-log: db/changelog/master.yaml
+
+
+
+
