@@ -90,7 +90,7 @@ public class FarmServiceImpl implements FarmService {
 
     @Override
     public List<Farm> getAllFarms() {
-        return null;
+        return farmRepository.findAll();
     }
 
     @Override

@@ -25,15 +25,15 @@ public class Tree {
     @JoinColumn(nullable = false)
     private Field field;
 
-    @Enumerated(EnumType.STRING)
-    private TreeStatus status; // État de l'arbre
+    /*@Enumerated(EnumType.STRING)
+    private TreeStatus status; // État de l'arbre*/
 
     @OneToMany(mappedBy = "tree")
     private List<HarvestDetail> harvestDetails = new ArrayList<>();
 
-    /*public int calculateAge() {
+    public int calculateAge() {
         return Period.between(this.plantingDate, LocalDate.now()).getYears();
-    }*/
+    }
 
     @Override
     public String toString() {
@@ -41,7 +41,6 @@ public class Tree {
                 "id=" + id +
                 ", plantingDate=" + plantingDate +
                 ", field=" + field +
-                ", status=" + status +
                 ", harvestDetails=" + harvestDetails +
                 '}';
     }

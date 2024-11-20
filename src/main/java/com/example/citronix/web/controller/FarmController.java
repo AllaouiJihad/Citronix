@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/farm")
 public class FarmController {
@@ -35,6 +38,13 @@ public class FarmController {
     public ResponseEntity<FarmResponseDTO> updateFarm(@PathVariable Long id,@Valid @RequestBody FarmRequestDTO farmRequestDTO){
         Farm updatedFarm = farmService.update(id,farmMapper.toEntity(farmRequestDTO));
         return new ResponseEntity<FarmResponseDTO>(farmMapper.toResponseDTO(updatedFarm),HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<FarmResponseDTO>> getFarms(){
+        List<Farm> farms = farmService.getAllFarms();
+        List<FarmResponseDTO> allfarms =  farms.stream().map(farm -> farmMapper.toResponseDTO(farm)).collect(Collectors.toList());
+        return  ResponseEntity.ok(allfarms);
     }
 }
 
