@@ -23,7 +23,7 @@ public class Field {
     @JoinColumn(nullable = false)
     private Farm farm;
 
-    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "field")
     private List<Tree> trees = new ArrayList<>();
 
     @Override

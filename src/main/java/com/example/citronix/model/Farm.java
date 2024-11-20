@@ -23,7 +23,7 @@ public class Farm {
 
     private String location;
 
-    private Double area; // En hectares
+    private Double area;
 
     private LocalDate creationDate;
 

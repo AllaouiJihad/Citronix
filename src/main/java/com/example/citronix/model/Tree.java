@@ -28,7 +28,7 @@ public class Tree {
     @Enumerated(EnumType.STRING)
     private TreeStatus status; // État de l'arbre
 
-    @OneToMany(mappedBy = "tree", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "tree")
     private List<HarvestDetail> harvestDetails = new ArrayList<>();
 
     /*public int calculateAge() {

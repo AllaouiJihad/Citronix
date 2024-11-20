@@ -2,18 +2,15 @@ package com.example.citronix.web.controller;
 
 import com.example.citronix.model.Farm;
 import com.example.citronix.service.FarmService;
-import com.example.citronix.web.VM.FarmRequestDTO;
-import com.example.citronix.web.VM.FarmResponseDTO;
+import com.example.citronix.web.VM.farm.FarmRequestDTO;
+import com.example.citronix.web.VM.farm.FarmResponseDTO;
 import com.example.citronix.web.VM.mapper.FarmMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/farm")
@@ -27,12 +24,17 @@ public class FarmController {
         this.farmService = farmService;
     }
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity<FarmResponseDTO> createFarm(@Valid @RequestBody FarmRequestDTO farm){
 
         Farm savedFarm = farmService.save(farmMapper.toEntity(farm));
-        FarmResponseDTO responseDTO = farmMapper.toResponseDTO(savedFarm);
-        return new ResponseEntity<FarmResponseDTO>(responseDTO, HttpStatus.CREATED);
+        return new ResponseEntity<FarmResponseDTO>(farmMapper.toResponseDTO(savedFarm), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<FarmResponseDTO> updateFarm(@PathVariable Long id,@Valid @RequestBody FarmRequestDTO farmRequestDTO){
+        Farm updatedFarm = farmService.update(id,farmMapper.toEntity(farmRequestDTO));
+        return new ResponseEntity<FarmResponseDTO>(farmMapper.toResponseDTO(updatedFarm),HttpStatus.CREATED);
     }
 }
 

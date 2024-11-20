@@ -29,10 +29,10 @@ public class Harvest {
     @Column(nullable = false)
     private Double totalQuantity; // En kg
 
-    @OneToMany(mappedBy = "harvest", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "harvest")
     private List<HarvestDetail> harvestDetails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "harvest", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "harvest")
     private List<Sale> sales = new ArrayList<>();
 
     @Override
