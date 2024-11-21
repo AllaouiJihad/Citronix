@@ -31,7 +31,7 @@ public class Field {
         return "Field{" +
                 "id=" + id +
                 ", area=" + area +
-                ", farm=" + farm +
+                ", farm=" + farm.getName() +
                 ", trees=" + trees +
                 '}';
     }

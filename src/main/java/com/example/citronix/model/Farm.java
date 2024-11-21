@@ -27,7 +27,7 @@ public class Farm {
 
     private LocalDate creationDate;
 
-    @OneToMany(mappedBy = "farm",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "farm",fetch = FetchType.LAZY)
     private List<Field> fields = new ArrayList<>();
 
     @Override
@@ -38,7 +38,7 @@ public class Farm {
                 ", location='" + location + '\'' +
                 ", area=" + area +
                 ", creationDate=" + creationDate +
-                ", fields=" + fields +
+                ", fields=" + fields.size() +
                 '}';
     }
 }

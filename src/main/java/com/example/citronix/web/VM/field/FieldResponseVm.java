@@ -1,18 +1,19 @@
-package com.example.citronix.web.VM.farm;
+package com.example.citronix.web.VM.field;
 
+
+import com.example.citronix.web.VM.farm.FarmVm;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FarmResponseDTO {
+public class FieldResponseVm {
+
     private Long id;
-    private String name;
-    private String location;
     private Double area;
-    private String creationDate;
+    private FarmVm farm;
 }

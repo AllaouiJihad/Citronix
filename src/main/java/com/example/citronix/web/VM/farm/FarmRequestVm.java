@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FarmRequestDTO {
+public class FarmRequestVm {
     @NotBlank(message = "Le nom de la ferme est obligatoire")
     private String name;
 
