@@ -1,8 +1,6 @@
 package com.example.citronix.service.impl;
 
-import com.example.citronix.exception.FarmSurfacePositiveException;
-import com.example.citronix.exception.FieldEmptyException;
-import com.example.citronix.exception.FieldSurfaceExceedsFarmException;
+import com.example.citronix.exception.FarmSurfaceException;
 import com.example.citronix.model.Farm;
 import com.example.citronix.model.Field;
 import com.example.citronix.repository.FarmRepository;
@@ -10,9 +8,7 @@ import com.example.citronix.service.FarmService;
 import com.example.citronix.service.FieldService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +26,7 @@ public class FarmServiceImpl implements FarmService {
     @Override
     public Farm save(Farm farm) {
         if (farm.getArea() <= 0) {
-            throw new FarmSurfacePositiveException("La superficie de la ferme doit être positive.");
+            throw new FarmSurfaceException("The farm area must be positive.");
         }
 
         /*if (farm.getFields() == null || farm.getFields().isEmpty()) {

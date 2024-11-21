@@ -1,5 +1,6 @@
 package com.example.citronix.service.impl;
 
+import com.example.citronix.exception.FarmSurfaceException;
 import com.example.citronix.exception.FieldsSurbiggerThanFarmException;
 import com.example.citronix.exception.ResourceNotFoundException;
 import com.example.citronix.model.Farm;
@@ -26,10 +27,17 @@ public class FieldServiceImpl implements FieldService {
     @Override
     public Field save(Field field,Long farmId) {
         if (field == null) {
-            throw new ResourceNotFoundException("field ne doit pas être null");
+            throw new ResourceNotFoundException("The field must not be null.");
         }
 
+
         Farm farm = farmFieldHelperService.validateAndFetchFarm(farmId, field.getArea());
+        if (farm.getArea()/2 < field.getArea()){
+            throw new FarmSurfaceException("The field cannot exceed 50% of the farm's total area.");
+        }
+        if (farm.getFields().size() >= 10){
+            throw new FarmSurfaceException("The farm cannot contain more than 10 fields");
+        }
         field.setFarm(farm);
         return fieldRepository.save(field);
     }

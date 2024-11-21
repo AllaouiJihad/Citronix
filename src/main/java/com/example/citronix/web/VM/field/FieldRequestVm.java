@@ -1,5 +1,6 @@
 package com.example.citronix.web.VM.field;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -12,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FieldRequestVm {
-    @NotNull(message = "La superficie est obligatoire")
-    @Positive(message = "La superficie doit être un nombre positif")
+    @NotNull(message = "The area is required.")
+    @Min(value = 1000, message = "The area must be at least 1000 m².")
     private Double area;
-    @NotNull(message = "L'id de ferme est obligatoire")
+    @NotNull(message = "The farm ID is required.")
     private Long farmId;
 }
