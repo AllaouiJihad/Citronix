@@ -35,6 +35,18 @@ public class Tree {
         return Period.between(this.plantingDate, LocalDate.now()).getYears();
     }
 
+    public String treeStatus(){
+        int age = calculateAge();
+        if (age < 3) {
+            return "YOUNG";
+        } else if (age <= 10) {
+            return "MATURE";
+        } else if (age <= 20) {
+            return "OLD";
+        } else {
+            return "NON_PRODUCTIVE";
+        }
+    }
     @Override
     public String toString() {
         return "Tree{" +

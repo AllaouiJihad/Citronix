@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public interface TreeService {
 
-    Tree save(Tree tree);
+    Tree save(Tree tree,Long fieldId);
 
     Tree update(Long id, Tree tree);
 
