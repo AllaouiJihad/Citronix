@@ -79,8 +79,8 @@ public class FarmServiceImpl implements FarmService {
 
     @Override
     public void delete(Long id) {
-        Farm existingFarm = farmRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Farm not found"));
+        Farm farmToDelete = getFarmById(id);
+        farmRepository.delete(farmToDelete);
 
     }
 

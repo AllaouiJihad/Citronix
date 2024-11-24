@@ -1,5 +1,7 @@
 package com.example.citronix.service.impl;
 
+import com.example.citronix.exception.HarvestNotFoundException;
+import com.example.citronix.exception.InvalidCredentialsException;
 import com.example.citronix.exception.TreeException;
 import com.example.citronix.model.Field;
 import com.example.citronix.model.Harvest;
@@ -70,16 +72,30 @@ public class HarvestServiceImpl implements HarvestService {
 
     @Override
     public Harvest findById(Long id) {
-        return null;
+
+        if (id == null){
+            throw new InvalidCredentialsException("harvest ID is Required");
+        }
+        return harvestRepository.findById(id)
+                .orElseThrow(()-> new HarvestNotFoundException("harvest Not Found"));
     }
 
     @Override
     public void delete(Long id) {
-
+        Harvest harvestToDelete = findById(id);
+        harvestRepository.delete(harvestToDelete);
     }
 
     @Override
     public List<Harvest> getHarvestsBySeason(Season season) {
-        return null;
+
+        return harvestRepository.findBySeason(season);
+
+    }
+
+    @Override
+    public List<Harvest> getAll() {
+        return harvestRepository.findAll();
+
     }
 }

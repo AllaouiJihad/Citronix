@@ -68,4 +68,9 @@ public class FieldController {
                 .collect(Collectors.toList());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteFarm(@PathVariable Long id){
+        fieldService.delete(id);
+        return ResponseEntity.ok("Field deleted successfully");
+    }
 }

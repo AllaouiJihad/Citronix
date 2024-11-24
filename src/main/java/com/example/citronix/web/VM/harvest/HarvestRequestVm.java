@@ -12,5 +12,5 @@ import java.time.LocalDate;
 @Builder
 public class HarvestRequestVm {
     @NotNull(message = "Date is required")
-    private LocalDate date;
+    private LocalDate harvestDate;
 }

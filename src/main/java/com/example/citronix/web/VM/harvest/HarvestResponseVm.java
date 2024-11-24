@@ -13,6 +13,6 @@ import java.time.LocalDate;
 public class HarvestResponseVm {
     private Long id;
     private Season season;
-    private LocalDate date;
+    private LocalDate harvestDate;
     private double totalQuantity;
 }

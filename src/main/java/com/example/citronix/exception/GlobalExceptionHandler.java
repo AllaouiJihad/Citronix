@@ -67,4 +67,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleTreeNotFoundException(Exception exception){
         return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(HarvestNotFoundException.class)
+    public ResponseEntity<String> handleHarvestNotFoundException(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    }
 }

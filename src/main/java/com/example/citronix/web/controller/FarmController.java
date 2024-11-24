@@ -52,6 +52,12 @@ public class FarmController {
         FarmResponseVm farm = farmMapper.toResponseDTO(farmService.getFarmById(id));
         return ResponseEntity.ok(farm);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteFarm(@PathVariable Long id){
+        farmService.delete(id);
+        return ResponseEntity.ok("Farm deleted successfully");
+    }
 }
 
 
