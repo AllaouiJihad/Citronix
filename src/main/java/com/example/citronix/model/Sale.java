@@ -28,8 +28,8 @@ public class Sale {
     @ManyToOne(fetch = FetchType.LAZY)
     private Harvest harvest;
 
-   /* public Double calculateRevenue() {
+    public Double calculateRevenue() {
         return this.quantity * this.unitPrice;
-    }*/
+    }
 
 }

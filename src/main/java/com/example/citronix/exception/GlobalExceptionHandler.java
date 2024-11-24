@@ -71,4 +71,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleHarvestNotFoundException(Exception exception){
         return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(HarvestAlreadySoldException.class)
+    public ResponseEntity<String> handleHarvestAlreadySoldException(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(SaleNotFoundException.class)
+    public ResponseEntity<String> handleSaleNotFoundException(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
+    }
 }
