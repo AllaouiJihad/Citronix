@@ -1,5 +1,6 @@
 package com.example.citronix.web.controller;
 
+import com.example.citronix.dto.SearchFarmDTO;
 import com.example.citronix.model.Farm;
 import com.example.citronix.service.FarmService;
 import com.example.citronix.web.VM.farm.FarmRequestVm;
@@ -57,6 +58,14 @@ public class FarmController {
     public ResponseEntity<String> deleteFarm(@PathVariable Long id){
         farmService.delete(id);
         return ResponseEntity.ok("Farm deleted successfully");
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<FarmResponseVm>> search(@RequestBody SearchFarmDTO searchFarmDTO){
+        List<Farm> farmList= farmService.search(searchFarmDTO);
+        List<FarmResponseVm> farmResponseVMS = farmList.stream()
+                .map(farmMapper::toResponseDTO)
+                .toList();
+        return ResponseEntity.ok().body(farmResponseVMS);
     }
 }
 

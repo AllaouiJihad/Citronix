@@ -1,9 +1,11 @@
 package com.example.citronix.service.impl;
 
+import com.example.citronix.dto.SearchFarmDTO;
 import com.example.citronix.exception.FarmSurfaceException;
 import com.example.citronix.model.Farm;
 import com.example.citronix.model.Field;
 import com.example.citronix.repository.FarmRepository;
+import com.example.citronix.repository.FarmSearchRepository;
 import com.example.citronix.service.FarmService;
 import com.example.citronix.service.FieldService;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,10 +19,13 @@ public class FarmServiceImpl implements FarmService {
 
     private final FarmRepository farmRepository;
     private FieldService fieldService;
+    FarmSearchRepository farmSearchRepository;
 
-    public FarmServiceImpl(FarmRepository farmRepository, FieldService fieldService) {
+
+    public FarmServiceImpl(FarmRepository farmRepository, FieldService fieldService, FarmSearchRepository farmSearchRepository) {
         this.farmRepository = farmRepository;
         this.fieldService = fieldService;
+        this.farmSearchRepository = farmSearchRepository;
     }
 
     @Override
@@ -96,10 +101,9 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public List<Farm> searchFarms(String name, String location, Double minArea) {
-        return null;
+    public List<Farm> search(SearchFarmDTO searchFarmDTO) {
+        return farmSearchRepository.findByCriteria(searchFarmDTO);
     }
-
     public List<Farm> getFarmsWithSumFieldsAreaLessThan4000() {
         List<Farm> farms = farmRepository.findAll();
 
