@@ -19,20 +19,12 @@ public class Field {
 
     private Double area;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Farm farm;
 
-    @OneToMany(mappedBy = "field")
+    @OneToMany(mappedBy = "field",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tree> trees = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Field{" +
-                "id=" + id +
-                ", area=" + area +
-                ", farm=" + farm.getName() +
-                ", trees=" + trees +
-                '}';
-    }
+
 }

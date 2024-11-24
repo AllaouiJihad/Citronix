@@ -1,6 +1,5 @@
 package com.example.citronix.model;
 
-import com.example.citronix.model.enums.TreeStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,17 +20,15 @@ public class Tree {
     private Long id;
     private LocalDate plantingDate;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Field field;
 
-    /*@Enumerated(EnumType.STRING)
-    private TreeStatus status; // État de l'arbre*/
 
-    @OneToMany(mappedBy = "tree")
+    @OneToMany(mappedBy = "tree",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HarvestDetail> harvestDetails = new ArrayList<>();
 
     public int calculateAge() {
+
         return Period.between(this.plantingDate, LocalDate.now()).getYears();
     }
 
@@ -47,13 +44,18 @@ public class Tree {
             return "NON_PRODUCTIVE";
         }
     }
-    @Override
-    public String toString() {
-        return "Tree{" +
-                "id=" + id +
-                ", plantingDate=" + plantingDate +
-                ", field=" + field +
-                ", harvestDetails=" + harvestDetails +
-                '}';
+
+    public double treeProductivity(){
+        int age = calculateAge();
+        if (age < 3) {
+            return 2.5;
+        } else if (age <= 10) {
+            return 12;
+        } else if (age <= 20) {
+            return 20;
+        } else {
+            return 0;
+        }
     }
+
 }

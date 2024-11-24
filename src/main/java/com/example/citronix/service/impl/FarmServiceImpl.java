@@ -28,6 +28,9 @@ public class FarmServiceImpl implements FarmService {
         if (farm.getArea() <= 0) {
             throw new FarmSurfaceException("The farm area must be positive.");
         }
+        if (farm.getArea() < 1000){
+            throw new FarmSurfaceException("The farm area must bz bigger than 1000m²");
+        }
 
         /*if (farm.getFields() == null || farm.getFields().isEmpty()) {
             throw new FieldEmptyException("Une ferme doit contenir au moins un champ.");

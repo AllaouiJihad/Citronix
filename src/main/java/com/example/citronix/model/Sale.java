@@ -18,29 +18,18 @@ public class Sale {
 
     private LocalDate saleDate;
 
-    private Double unitPrice; // Prix par kg
+    private Double unitPrice;
 
-    private Double quantity; // Quantité vendue en kg
+    private Double quantity;
 
     private String client;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Harvest harvest;
 
    /* public Double calculateRevenue() {
         return this.quantity * this.unitPrice;
     }*/
 
-    @Override
-    public String toString() {
-        return "Sale{" +
-                "id=" + id +
-                ", saleDate=" + saleDate +
-                ", unitPrice=" + unitPrice +
-                ", quantity=" + quantity +
-                ", client='" + client + '\'' +
-                ", harvest=" + harvest +
-                '}';
-    }
 }

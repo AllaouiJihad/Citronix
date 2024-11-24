@@ -1,5 +1,6 @@
 package com.example.citronix.service;
 import com.example.citronix.model.Tree;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface TreeService {
     void delete(Long id);
     Tree getTreeById(Long id);
     List<Tree> getAll();
+    Page<Tree> getAllTreesPaginated(int page, int size);
+
 }
