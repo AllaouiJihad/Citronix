@@ -42,10 +42,9 @@ public class FieldServiceImplTest {
         when(farmFieldHelperService.validateAndFetchFarm(1L, 10.0)).thenReturn(farm);
         when(fieldRepository.save(field)).thenReturn(field);
 
-        // Act
+
         Field savedField = fieldService.save(field, 1L);
 
-        // Assert
         assertNotNull(savedField);
         verify(fieldRepository, times(1)).save(field);
     }
