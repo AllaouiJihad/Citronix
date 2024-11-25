@@ -1,19 +1,20 @@
 package com.example.citronix.web.controller;
 
+import com.example.citronix.dto.SearchFarmDTO;
 import com.example.citronix.model.Farm;
 import com.example.citronix.service.FarmService;
-import com.example.citronix.web.VM.FarmRequestDTO;
-import com.example.citronix.web.VM.FarmResponseDTO;
+import com.example.citronix.web.VM.farm.FarmRequestVm;
+import com.example.citronix.web.VM.farm.FarmResponseVm;
 import com.example.citronix.web.VM.mapper.FarmMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/farm")
@@ -27,12 +28,44 @@ public class FarmController {
         this.farmService = farmService;
     }
 
-    @GetMapping("/save")
-    public ResponseEntity<FarmResponseDTO> createFarm(@Valid @RequestBody FarmRequestDTO farm){
+    @PostMapping("/save")
+    public ResponseEntity<FarmResponseVm> createFarm(@Valid @RequestBody FarmRequestVm farm){
 
         Farm savedFarm = farmService.save(farmMapper.toEntity(farm));
-        FarmResponseDTO responseDTO = farmMapper.toResponseDTO(savedFarm);
-        return new ResponseEntity<FarmResponseDTO>(responseDTO, HttpStatus.CREATED);
+        return new ResponseEntity<FarmResponseVm>(farmMapper.toResponseDTO(savedFarm), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<FarmResponseVm> updateFarm(@PathVariable Long id, @Valid @RequestBody FarmRequestVm farmRequestDTO){
+        Farm updatedFarm = farmService.update(id,farmMapper.toEntity(farmRequestDTO));
+        return new ResponseEntity<FarmResponseVm>(farmMapper.toResponseDTO(updatedFarm),HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<FarmResponseVm>> getFarms(){
+        List<Farm> farms = farmService.getAllFarms();
+        List<FarmResponseVm> allfarms =  farms.stream().map(farm -> farmMapper.toResponseDTO(farm)).collect(Collectors.toList());
+        return  ResponseEntity.ok(allfarms);
+    }
+
+    @GetMapping("/getFarm/{id}")
+    public ResponseEntity<FarmResponseVm> getFarm(@PathVariable Long id){
+        FarmResponseVm farm = farmMapper.toResponseDTO(farmService.getFarmById(id));
+        return ResponseEntity.ok(farm);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteFarm(@PathVariable Long id){
+        farmService.delete(id);
+        return ResponseEntity.ok("Farm deleted successfully");
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<FarmResponseVm>> search(@RequestBody SearchFarmDTO searchFarmDTO){
+        List<Farm> farmList= farmService.search(searchFarmDTO);
+        List<FarmResponseVm> farmResponseVMS = farmList.stream()
+                .map(farmMapper::toResponseDTO)
+                .toList();
+        return ResponseEntity.ok().body(farmResponseVMS);
     }
 }
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface FieldService {
-    Field save(Field field);
+    Field save(Field field,Long farmId);
     Field update(Long id, Field field);
     void delete(Long id);
     Field getFieldById(Long id);

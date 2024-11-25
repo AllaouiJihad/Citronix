@@ -1,5 +1,6 @@
 package com.example.citronix.service;
 
+import com.example.citronix.dto.SearchFarmDTO;
 import com.example.citronix.model.Farm;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public interface FarmService {
     void delete(Long id);
     Farm getFarmById(Long id);
     List<Farm> getAllFarms();
-    List<Farm> searchFarms(String name, String location, Double minArea);
+
+    List<Farm> search(SearchFarmDTO searchFarmDTO);
 //    Double calculateTotalArea(Long farmId);
 }
