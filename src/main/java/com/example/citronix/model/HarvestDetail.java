@@ -16,24 +16,13 @@ public class HarvestDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Harvest harvest;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Tree tree;
 
-    @Column(nullable = false)
-    private Double quantity; // En kg
+    private Double quantity;
 
-    @Override
-    public String toString() {
-        return "HarvestDetail{" +
-                "id=" + id +
-                ", harvest=" + harvest +
-                ", tree=" + tree +
-                ", quantity=" + quantity +
-                '}';
-    }
+
 }

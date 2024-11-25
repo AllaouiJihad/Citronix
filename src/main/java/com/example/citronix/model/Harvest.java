@@ -20,30 +20,17 @@ public class Harvest {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Season season; // Saison de récolte
+    private Season season;
 
-    @Column(nullable = false)
     private LocalDate harvestDate;
 
-    @Column(nullable = false)
-    private Double totalQuantity; // En kg
+    private Double totalQuantity;
 
-    @OneToMany(mappedBy = "harvest", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "harvest",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HarvestDetail> harvestDetails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "harvest", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "harvest",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sale> sales = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Harvest{" +
-                "id=" + id +
-                ", season=" + season +
-                ", harvestDate=" + harvestDate +
-                ", totalQuantity=" + totalQuantity +
-                ", harvestDetails=" + harvestDetails +
-                ", sales=" + sales +
-                '}';
-    }
+
 }
