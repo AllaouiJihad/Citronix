@@ -34,40 +34,9 @@ public class HarvestServiceImpl implements HarvestService {
     @Transactional
     @Override
     public Harvest createHarvest(Long fieldId, Harvest harvest) {
-        Field fieldToHarvest = fieldService.getFieldById(fieldId);
-        Season harvestSeason = SeasonUtils.getSeasonFromDate(harvest.getHarvestDate());
-        int harvestYear = harvest.getHarvestDate().getYear();
+       Field field = fieldService.getFieldById(fieldId);
+       Season season = harvest.getSeason();
 
-
-        List<Tree> trees = fieldToHarvest.getTrees().stream()
-                .filter(tree -> !harvestDatailRepository.existsByTreeAndSeasonAndYear(tree, harvestSeason,harvestYear))
-                .toList();
-
-        if (trees.isEmpty()){
-            throw new TreeException("All trees has been harvested this season.");
-        }
-
-        double totalQuantity = trees.stream()
-                .mapToDouble(Tree::treeProductivity)
-                .sum();
-
-        Harvest harvestToSave = Harvest.builder()
-                .harvestDate(harvest.getHarvestDate())
-                .season(harvestSeason)
-                .totalQuantity(totalQuantity)
-                .build();
-
-        Harvest savedHarvest = harvestRepository.save(harvestToSave);
-
-        List<HarvestDetail> harvestDetails = trees.stream()
-                .map(tree -> HarvestDetail.builder()
-                        .harvest(savedHarvest)
-                        .tree(tree)
-                        .quantity(tree.treeProductivity())
-                        .build())
-                .toList();
-        harvestDatailRepository.saveAll(harvestDetails);
-        return savedHarvest;
     }
 
     @Override
